@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Corrugated Box Costing Calculator — Sheet Size, Board Weight &amp; Cost Per Box | Threxa</title>
+<meta name="description" content="Free calculator for corrugated box manufacturers. Enter box size, ply, GSM, BF and today's paper rate to get cutting length, deckle, board weight per box, kilos of each grade to purchase and cost per box. Every step of the working is shown.">
+<meta name="author" content="Threxa">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="https://boxcalc.theingredientlist.co/">
+<meta name="geo.region" content="IN-KA"><meta name="geo.placename" content="Bengaluru">
+<meta name="theme-color" content="#0A0A0F">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://boxcalc.theingredientlist.co/">
+<meta property="og:image" content="https://boxcalc.theingredientlist.co/og-boxcalc.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://boxcalc.theingredientlist.co/og-boxcalc.png">
+<meta property="og:title" content="Corrugated Box Costing Calculator — free, from Threxa">
+<meta property="og:description" content="Cutting size, board weight, paper to purchase and cost per box. Shows the working so you can check it against your own method.">
+<meta property="og:site_name" content="Threxa"><meta property="og:locale" content="en_IN">
+<link rel="icon" type="image/png" href="/threxa-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,0..100&family=DM+Sans:opsz,wght@9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0A0F; --paper:#FAFAF7; --violet:#7B4DF6; --violet-lt:#A47AFF; --mint:#6BFFB0;
+  --space:#0F0B1F; --space-lift:#1A1628;
+  --ink-55:rgba(10,10,15,.55); --ink-38:rgba(10,10,15,.38); --ink-12:rgba(10,10,15,.12);
+  --ink-07:rgba(10,10,15,.07); --paper-60:rgba(250,250,247,.6); --paper-38:rgba(250,250,247,.38);
+  --paper-12:rgba(250,250,247,.12);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.55;
+  -webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+@media(max-width:600px){.wrap{padding:0 18px}}
+
+nav.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:18px 0;border-bottom:1px solid var(--ink-07)}
+nav.bar img{height:24px;width:auto;display:block}
+nav.bar .back{font-size:13.5px;color:var(--ink-55);text-decoration:none}
+nav.bar .back:hover{color:var(--violet)}
+
+header.hd{padding:52px 0 34px}
+h1{font-family:Fraunces,Georgia,serif;font-variation-settings:'SOFT' 30;font-weight:400;
+  font-size:clamp(30px,5vw,50px);line-height:1.06;letter-spacing:-.02em;margin:0 0 14px;max-width:16ch}
+h1 i{font-style:italic;font-weight:300}
+.lede{margin:0;max-width:60ch;font-size:17px;color:var(--ink-55);line-height:1.6}
+.meta{margin:22px 0 0;display:flex;flex-wrap:wrap;gap:8px 10px}
+.pill{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.02em;
+  padding:5px 10px;border:1px solid var(--ink-12);border-radius:100px;color:var(--ink-55)}
+.pill.on{border-color:var(--violet);color:var(--violet)}
+
+.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;padding-bottom:70px}
+@media(min-width:1000px){.grid{grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:32px;align-items:start}
+  .out{position:sticky;top:20px}}
+
+.card{background:#fff;border:1px solid var(--ink-07);border-radius:14px;overflow:hidden}
+.card+.card{margin-top:18px}
+.card>h2{margin:0;padding:15px 20px;font-size:13px;font-weight:500;letter-spacing:.01em;
+  border-bottom:1px solid var(--ink-07);display:flex;justify-content:space-between;
+  align-items:baseline;gap:14px}
+.card>h2 span{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-38);font-weight:400}
+.pad{padding:20px}
+.row{display:grid;gap:12px}
+.r2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.r3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.lab{display:block;font-size:12px;color:var(--ink-55);margin-bottom:6px}
+.lab i{font-style:normal;color:var(--ink-38)}
+input,select{width:100%;padding:10px 11px;background:var(--paper);color:var(--ink);
+  border:1px solid var(--ink-12);border-radius:8px;font-size:14px;
+  font-family:'JetBrains Mono',ui-monospace,monospace;transition:border-color .14s}
+select{font-family:'DM Sans',sans-serif}
+input:hover,select:hover{border-color:rgba(10,10,15,.25)}
+input:focus-visible,select:focus-visible,button:focus-visible,summary:focus-visible,a:focus-visible{
+  outline:2px solid var(--violet);outline-offset:2px}
+.seg{display:flex;gap:6px}
+.seg button{flex:1;padding:10px 4px;background:var(--paper);color:var(--ink-55);
+  border:1px solid var(--ink-12);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;
+  cursor:pointer;transition:all .14s}
+.seg button[aria-pressed=true]{background:var(--violet);border-color:var(--violet);color:#fff}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.stackhd,.ply{display:grid;grid-template-columns:minmax(84px,1.1fr) repeat(3,minmax(0,1fr));gap:8px;align-items:center}
+.stackhd{padding:0 2px 8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-38)}
+.ply{padding:7px 8px;border:1px solid var(--ink-07);border-radius:9px;background:var(--paper)}
+.ply+.ply{margin-top:5px}
+.ply.flt{background:rgba(123,77,246,.055);border-color:rgba(123,77,246,.18)}
+.ply .nm{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-55);min-width:0}
+.ply .nm b{font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ply input{padding:7px 8px;font-size:13px;background:#fff}
+svg.g{flex:0 0 auto;display:block;color:var(--violet)}
+
+.out .panel{border-radius:16px;overflow:hidden;color:var(--paper);
+  background:radial-gradient(circle at 18% 0%,rgba(123,77,246,.26),transparent 36%),
+             linear-gradient(150deg,var(--space),var(--space-lift));
+  box-shadow:0 30px 90px -42px rgba(15,11,31,.72)}
+.out .panel>h2{padding:15px 20px;margin:0;font-size:13px;font-weight:500;color:var(--paper);
+  border-bottom:1px solid var(--paper-12);display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.out .panel>h2 span{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--paper-38);font-weight:400}
+.top{padding:26px 20px 22px;border-bottom:1px solid var(--paper-12)}
+.big{font-family:Fraunces,Georgia,serif;font-variation-settings:'SOFT' 30;font-weight:400;
+  font-size:clamp(40px,7.5vw,62px);line-height:1;letter-spacing:-.035em;margin:0;
+  color:var(--mint);font-variant-numeric:tabular-nums}
+.big small{font-family:'DM Sans',sans-serif;font-size:14px;color:var(--paper-38);letter-spacing:0;font-weight:400}
+.sub2{margin:11px 0 0;font-size:13.5px;color:var(--paper-60)}
+.sub2 b{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:12.5px;color:var(--paper)}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.kpi{padding:14px 20px;border-bottom:1px solid var(--paper-12);border-right:1px solid var(--paper-12)}
+.kpi:nth-child(2n){border-right:0}
+.kpi dt{margin:0 0 4px;font-size:11px;color:var(--paper-38)}
+.kpi dd{margin:0;font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:500;font-variant-numeric:tabular-nums}
+.kpi dd em{font-style:normal;font-size:10.5px;color:var(--paper-38);font-family:'DM Sans',sans-serif}
+.dia{padding:18px 16px;border-bottom:1px solid var(--paper-12);overflow-x:auto}
+.dia svg{display:block;width:100%;height:auto;min-width:280px}
+details.w{border-bottom:1px solid var(--paper-12)}
+details.w>summary{padding:14px 20px;cursor:pointer;font-size:13px;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--paper)}
+details.w>summary::-webkit-details-marker{display:none}
+details.w>summary::after{content:"+";font-family:'JetBrains Mono',monospace;color:var(--violet-lt);font-size:17px}
+details.w[open]>summary::after{content:"\2212"}
+.steps{padding:4px 20px 18px;border-top:1px solid var(--paper-12)}
+.st{display:grid;grid-template-columns:1fr auto;gap:4px 14px;align-items:baseline;
+  padding:9px 0;border-bottom:1px solid rgba(250,250,247,.07)}
+.st:last-child{border-bottom:0}
+.st .t{font-size:13px;color:var(--paper-60);min-width:0}
+.st .t em{display:block;font-style:normal;font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--paper-38);margin-top:3px;word-break:break-word}
+.st .v{font-family:'JetBrains Mono',monospace;font-size:13.5px;white-space:nowrap;
+  font-variant-numeric:tabular-nums;color:var(--paper)}
+.st.tot{border-top:1px solid var(--paper-12);border-bottom:0;margin-top:5px;padding-top:12px}
+.st.tot .t{color:var(--paper)}
+.st.tot .v{font-size:15px}
+table.buy{width:100%;border-collapse:collapse;font-size:13px}
+table.buy th{text-align:left;font-weight:400;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+  color:var(--paper-38);padding:0 8px 8px 0;border-bottom:1px solid var(--paper-12)}
+table.buy th:last-child,table.buy td:last-child{text-align:right;padding-right:0}
+table.buy td{padding:9px 8px 9px 0;border-bottom:1px solid rgba(250,250,247,.07);
+  font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;color:var(--paper)}
+table.buy td:first-child{font-family:'DM Sans',sans-serif;color:var(--paper-60)}
+table.buy tr:last-child td{border-bottom:0;border-top:1px solid var(--paper-12)}
+.acts{padding:18px 20px;display:grid;gap:10px}
+@media(min-width:430px){.acts{grid-template-columns:1fr 1fr}}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 16px;border-radius:10px;
+  border:1px solid transparent;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;
+  text-decoration:none;transition:opacity .14s,background .14s}
+.btn.wa{background:#25D366;color:#0A0A0F}
+.btn.gh{background:transparent;color:var(--paper);border-color:var(--paper-12)}
+.btn.gh:hover{background:rgba(250,250,247,.07)}
+.btn:hover{opacity:.92}
+.fine{padding:0 20px 18px;font-size:11.5px;color:var(--paper-38);line-height:1.55;margin:0}
+
+.prose{max-width:64ch;padding:14px 0 60px;border-top:1px solid var(--ink-07)}
+.prose h2{font-family:Fraunces,Georgia,serif;font-variation-settings:'SOFT' 30;font-weight:400;
+  font-size:27px;letter-spacing:-.015em;margin:40px 0 12px}
+.prose h3{font-size:16px;font-weight:500;margin:28px 0 7px}
+.prose p{margin:0 0 14px;color:var(--ink-55);font-size:15.5px;line-height:1.68}
+.prose code{font-family:'JetBrains Mono',monospace;font-size:12.5px;background:#fff;
+  border:1px solid var(--ink-07);padding:3px 7px;border-radius:6px;color:var(--ink);display:inline-block}
+.cta{margin-top:40px;padding:26px;border-radius:16px;color:var(--paper);
+  background:radial-gradient(circle at 80% 0%,rgba(123,77,246,.28),transparent 42%),
+             linear-gradient(150deg,var(--space),var(--space-lift))}
+.cta h3{margin:0 0 10px;font-family:Fraunces,Georgia,serif;font-variation-settings:'SOFT' 30;
+  font-weight:400;font-size:22px;letter-spacing:-.01em}
+.cta p{color:var(--paper-60);margin:0 0 18px;max-width:52ch;font-size:15px}
+.cta .btn{background:var(--violet);color:#fff;display:inline-flex}
+footer.end{padding:22px 0 44px;border-top:1px solid var(--ink-07);font-size:12.5px;color:var(--ink-38)}
+
+/* text inputs added for the printed sheet header */
+.in input[type=text]{width:100%;font:inherit;font-size:14px;color:var(--ink);background:var(--paper);
+  border:1px solid var(--ink-12);border-radius:8px;padding:9px 11px}
+.in input[type=text]:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 3px rgba(123,77,246,.14)}
+.acts{flex-wrap:wrap}
+
+/* printed costing sheet — hidden on screen, is the page when printing */
+.psheet{display:none}
+@media print{
+  @page{size:A4;margin:14mm}
+  body{background:#fff;color:#000;font-size:11pt}
+  .wrap>nav.bar,header.hd,.grid,.prose,footer.end{display:none !important}
+  .psheet{display:block}
+  .psheet h1{font-family:'Fraunces',Georgia,serif;font-size:19pt;margin:0 0 2mm;font-weight:600}
+  .psheet .sub{font-size:9.5pt;color:#444;margin:0 0 7mm}
+  .psheet h2{font-size:10pt;text-transform:uppercase;letter-spacing:.08em;
+    margin:7mm 0 2mm;padding-bottom:1.5mm;border-bottom:1px solid #000}
+  .psheet table{width:100%;border-collapse:collapse;font-size:10pt}
+  .psheet td{padding:1.8mm 0;border-bottom:1px solid #e3e3e3;vertical-align:top}
+  .psheet td:last-child{text-align:right;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+  .psheet td em{display:block;font-style:normal;font-size:8.5pt;color:#666}
+  .psheet tr.tot td{font-weight:700;border-bottom:none;border-top:1.4px solid #000;padding-top:2.2mm}
+  .psheet .foot{margin-top:9mm;padding-top:3mm;border-top:1px solid #ccc;font-size:8.5pt;color:#555}
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication",
+"name":"Corrugated Box Costing Calculator",
+"url":"https://boxcalc.theingredientlist.co/",
+"applicationCategory":"BusinessApplication","operatingSystem":"Any",
+"offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},
+"description":"Free calculator for corrugated box manufacturers: cutting length, deckle, board GSM with flute take-up, board weight per box, paper to purchase by grade, and cost per box.",
+"publisher":{"@type":"Organization","name":"Threxa","url":"https://threxa.theingredientlist.co/"}}
+</script>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="bar">
+  <a href="https://threxa.theingredientlist.co/" aria-label="Threxa home"><img src="/threxa-logo.png" alt="Threxa"></a>
+  <a class="back" href="https://threxa.theingredientlist.co/">Threxa ERP &rarr;</a>
+</nav>
+
+<header class="hd">
+  <h1>What does this box <i>actually</i> cost?</h1>
+  <p class="lede">Box size, the board you run, today's paper rate. You get the cutting size, board weight, the kilos of each grade to purchase, and cost per box — with every step shown, so you can check it against your own sheet.</p>
+  <p class="meta">
+    <span class="pill on">Free · no signup</span>
+    <span class="pill">Nothing stored or sent</span>
+    <span class="pill">Built in Bengaluru</span>
+  </p>
+</header>
+
+<div class="grid">
+
+<div class="in">
+  <section class="card">
+    <h2>The box <span>internal, mm</span></h2>
+    <div class="pad">
+      <div class="row r3">
+        <label><span class="lab">Length <i>L</i></span><input type="number" id="L" value="400" min="1"></label>
+        <label><span class="lab">Breadth <i>B</i></span><input type="number" id="B" value="300" min="1"></label>
+        <label><span class="lab">Height <i>H</i></span><input type="number" id="H" value="250" min="1"></label>
+      </div>
+      <div class="row r2" style="margin-top:14px">
+        <label><span class="lab">Your plant <i>on the printout</i></span><input type="text" id="co" placeholder="e.g. Shree Packaging" autocomplete="organization"></label>
+        <label><span class="lab">Customer <i>optional</i></span><input type="text" id="cu" placeholder="e.g. Nandi Foods"></label>
+      </div>
+      <div class="row r2" style="margin-top:14px">
+        <label><span class="lab">Style</span><select id="sty">
+          <option value="rsc">RSC / 0201 — regular slotted</option>
+          <option value="hsc">HSC / 0203 — half slotted</option>
+          <option value="fol">FOL / 0202 — full overlap</option>
+        </select></label>
+        <label><span class="lab">Quantity <i>boxes</i></span><input type="number" id="qty" value="5000" min="1"></label>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>The board <span>ply &amp; flute</span></h2>
+    <div class="pad">
+      <div class="row r2">
+        <div><span class="lab">Ply</span>
+          <div class="seg" id="seg" role="group" aria-label="Ply">
+            <button type="button" data-p="3" aria-pressed="true">3 ply</button>
+            <button type="button" data-p="5" aria-pressed="false">5 ply</button>
+            <button type="button" data-p="7" aria-pressed="false">7 ply</button>
+          </div></div>
+        <label><span class="lab">Flute <i>take-up factor</i></span><select id="fl">
+          <option value="1.36" selected>B flute — 1.36</option>
+          <option value="1.45">C flute — 1.45</option>
+          <option value="1.55">A flute — 1.55</option>
+          <option value="1.27">E flute — 1.27</option>
+        </select></label>
+      </div>
+      <div style="margin-top:18px">
+        <span class="lab">Paper in each layer <i>— outer at top</i></span>
+        <div class="stackhd"><div>Layer</div><div>GSM</div><div>BF</div><div>₹ / kg</div></div>
+        <div id="plies"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Allowances <span>set these to your plant</span></h2>
+    <div class="pad">
+      <div class="row r2">
+        <label><span class="lab">Length allowance <i>joint + fold, mm</i></span><input type="number" id="aL" value="40" min="0"></label>
+        <label><span class="lab">Deckle allowance <i>flap fold, mm</i></span><input type="number" id="aD" value="6" min="0"></label>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Cost, margin &amp; tax</h2>
+    <div class="pad">
+      <div class="row r2">
+        <label><span class="lab">Wastage <i>% of board</i></span><input type="number" id="ws" value="8" min="0" max="59" step=".5"></label>
+        <label><span class="lab">Conversion <i>₹ per kg board</i></span><input type="number" id="cv" value="9" min="0" step=".5"></label>
+      </div>
+      <div class="row r2" style="margin-top:12px">
+        <label><span class="lab">Printing &amp; extras <i>₹ / box</i></span><input type="number" id="ex" value="0.40" min="0" step=".05"></label>
+        <label><span class="lab">Freight <i>₹ / box</i></span><input type="number" id="fr" value="0.25" min="0" step=".05"></label>
+      </div>
+      <div class="row r3" style="margin-top:12px">
+        <label><span class="lab">Overhead <i>%</i></span><input type="number" id="oh" value="7" min="0" step=".5"></label>
+        <label><span class="lab">Margin <i>%</i></span><input type="number" id="mg" value="15" min="0" step=".5"></label>
+        <label><span class="lab">GST <i>% · HSN 4819</i></span><input type="number" id="gst" value="18" min="0" step="1"></label>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="out">
+  <section class="panel">
+    <h2>Result <span>per box, before GST</span></h2>
+    <div class="top">
+      <p class="big" id="sell">₹0.00 <small>selling price / box</small></p>
+      <p class="sub2">Cost <b id="cost">₹0</b> · margin <b id="mg2">₹0</b> · order value <b id="ov">₹0</b></p>
+    </div>
+    <dl class="kpis">
+      <div class="kpi"><dt>Cutting length</dt><dd id="kL">0 <em>mm</em></dd></div>
+      <div class="kpi"><dt>Deckle</dt><dd id="kD">0 <em>mm</em></dd></div>
+      <div class="kpi"><dt>Board per box</dt><dd id="kW">0 <em>kg</em></dd></div>
+      <div class="kpi"><dt>Combined GSM</dt><dd id="kG">0 <em>gsm</em></dd></div>
+      <div class="kpi"><dt>Est. bursting strength</dt><dd id="kB">0 <em>kg/cm²</em></dd></div>
+      <div class="kpi"><dt>Board for the order</dt><dd id="kT">0 <em>kg</em></dd></div>
+    </dl>
+    <div class="dia"><svg id="dg" viewBox="0 0 660 300" role="img" aria-labelledby="dgt"><title id="dgt">Flat blank layout</title></svg></div>
+    <details class="w" open>
+      <summary>The working — check it against your own method</summary>
+      <div class="steps" id="steps"></div>
+    </details>
+    <details class="w">
+      <summary>Paper to purchase for this order</summary>
+      <div class="steps">
+        <table class="buy"><thead><tr><th>Grade</th><th>Kg</th><th>₹</th></tr></thead><tbody id="buy"></tbody></table>
+        <p class="fine" style="padding:14px 0 0">Includes wastage, so this is what to buy — not what ends up inside the boxes.</p>
+      </div>
+    </details>
+    <details class="w">
+      <summary>Invoice value with GST</summary>
+      <div class="steps" id="gstBox"></div>
+    </details>
+    <div class="acts">
+      <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener">Send to WhatsApp</a>
+      <button class="btn gh" id="cp" type="button">Copy as text</button>
+      <button class="btn gh" id="lk" type="button">Copy link</button>
+      <button class="btn gh" id="pr" type="button">Print / Save PDF</button>
+      <button class="btn gh" id="cs" type="button">Download CSV</button>
+    </div>
+    <p class="fine">Nothing typed here leaves your browser. The link carries the numbers in the address itself — open it anywhere and the same costing comes back.</p>
+  </section>
+</div>
+</div>
+
+<div class="prose">
+  <h2>How the sheet size is worked out</h2>
+  <p>A regular slotted container wraps once around the box. Along the running length there are four panels — length, breadth, length, breadth — plus the lap where the joint is stitched or glued. Across the deckle there is the height plus one full breadth, because the top and bottom flaps are each half the breadth.</p>
+  <p><code>Cutting length = 2 × (L + B) + joint and fold allowance</code></p>
+  <p><code>Deckle = B + H + flap fold allowance</code></p>
+  <p>The allowances are what nobody agrees on. A 5 ply BC board needs more fold allowance than a 3 ply E flute, and every corrugator has settled on a joint lap over years of running. Both figures are editable here rather than fixed, so the sheet size can be made to match what you actually cut.</p>
+
+  <h3>Only the fluting takes up — not the whole board</h3>
+  <p>The corrugating medium is fluted, so a metre of finished board holds more than a metre of that paper. The take-up factor accounts for it: roughly 1.36 for B flute, 1.45 for C, 1.55 for A, 1.27 for E. It applies to the fluting alone. The liners run flat and take up nothing. Applying the factor to the whole board — a common shortcut — overstates a 3 ply by around eight per cent, and the error grows as the flute gets bigger.</p>
+
+  <h3>Wastage is divided, not added</h3>
+  <p>If eight per cent of board is lost to trim, set-up and rejection, then shipping one good box means buying the board for one box divided by 0.92 — not multiplied by 1.08. On ₹100 of board that is ₹108.70 rather than ₹108. Small on one box. Not small across a year.</p>
+
+  <h3>About the bursting strength figure</h3>
+  <p>The BS shown is an estimate from the GSM and BF of each paper. It is useful for comparing one board specification against another. It is not a substitute for a Mullen test — real bursting strength depends on gumming, moisture and how the board was run.</p>
+
+  <h3>Why GST sits at the bottom and not in the headline</h3>
+  <p>Your customer is almost always registered and claims the input credit, so GST changes what goes on the invoice but not whether your price is competitive. Keeping it out of the per-box figure means the number you compare against a rival quote is the right one. It is there at the bottom because that is the figure you type into the quotation.</p>
+
+  <div class="cta">
+    <h3>This prices one box. Your plant runs forty a day.</h3>
+    <p>Threxa is an ERP built for corrugated box plants in India. It holds your board specifications and paper rates, prices a quotation from them, turns that into a job card, and measures the wastage that actually happened against the figure you assumed here.</p>
+    <a class="btn" href="https://threxa.theingredientlist.co/">See how Threxa runs a plant</a>
+  </div>
+</div>
+
+<div class="psheet" id="psheet" aria-hidden="true"></div>
+
+<footer class="end">Threxa — a unit of The Ingredient List, Bengaluru. Free to use and free to share. If a figure does not match your plant, tell us and we will fix it.</footer>
+</div>
+
+<script>
+(function(){"use strict";
+var $=function(i){return document.getElementById(i)},
+    n=function(i){var v=parseFloat($(i).value);return isFinite(v)?v:0},
+    ply=3,layers=[],R={};
+var LIN={g:180,bf:18,r:42},MED={g:120,bf:16,r:36},MID={g:150,bf:16,r:38};
+function mk(nm,d,f){return{nm:nm,g:d.g,bf:d.bf,r:d.r,f:f}}
+function build(){
+  var o = ply===3 ? [mk("Outer liner",LIN,0),mk("Fluting",MED,1),mk("Inner liner",LIN,0)]
+      : ply===5 ? [mk("Outer liner",LIN,0),mk("Fluting 1",MED,1),mk("Middle liner",MID,0),mk("Fluting 2",MED,1),mk("Inner liner",LIN,0)]
+      : [mk("Outer liner",LIN,0),mk("Fluting 1",MED,1),mk("Middle 1",MID,0),mk("Fluting 2",MED,1),mk("Middle 2",MID,0),mk("Fluting 3",MED,1),mk("Inner liner",LIN,0)];
+  for(var i=0;i<o.length;i++) if(layers[i]){o[i].g=layers[i].g;o[i].bf=layers[i].bf;o[i].r=layers[i].r}
+  layers=o;paint()
+}
+var SL='<svg class="g" width="17" height="9" viewBox="0 0 17 9" aria-hidden="true"><rect x="0" y="3.5" width="17" height="2.2" rx="1.1" fill="currentColor" opacity=".45"/></svg>',
+    SF='<svg class="g" width="17" height="9" viewBox="0 0 17 9" aria-hidden="true"><path d="M0 7C1.4 7 1.4 2 2.8 2S4.2 7 5.6 7 7 2 8.4 2 9.8 7 11.2 7 12.6 2 14 2s1.4 5 2.8 5" fill="none" stroke="currentColor" stroke-width="1.35" opacity=".8"/></svg>';
+function paint(){
+  var h="";layers.forEach(function(L,i){
+    h+='<div class="ply'+(L.f?' flt':'')+'"><div class="nm">'+(L.f?SF:SL)+'<b>'+L.nm+'</b></div>'
+     + '<input type="number" data-i="'+i+'" data-k="g" value="'+L.g+'" min="60" step="5" aria-label="'+L.nm+' GSM">'
+     + '<input type="number" data-i="'+i+'" data-k="bf" value="'+L.bf+'" min="8" aria-label="'+L.nm+' BF">'
+     + '<input type="number" data-i="'+i+'" data-k="r" value="'+L.r+'" min="1" step=".5" aria-label="'+L.nm+' rate">'
+     + '</div>'});
+  $("plies").innerHTML=h
+}
+$("plies").addEventListener("input",function(e){var t=e.target;if(!t.dataset.k)return;
+  var v=parseFloat(t.value);if(isFinite(v)){layers[+t.dataset.i][t.dataset.k]=v;calc()}});
+$("seg").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
+  ply=+b.dataset.p;
+  [].forEach.call(this.querySelectorAll("button"),function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});
+  $("aL").value=ply===3?40:ply===5?48:56;$("aD").value=ply===3?6:ply===5?10:14;build();calc()});
+
+var inr=function(v,d){d=d===undefined?2:d;if(!isFinite(v))v=0;
+  return "₹"+v.toLocaleString("en-IN",{minimumFractionDigits:d,maximumFractionDigits:d})},
+    nf=function(v,d){d=d||0;if(!isFinite(v))v=0;
+  return v.toLocaleString("en-IN",{minimumFractionDigits:d,maximumFractionDigits:d})};
+
+function calc(){
+  var L=n("L"),B=n("B"),H=n("H"),sty=$("sty").value,qty=Math.max(1,n("qty")),
+      tuf=parseFloat($("fl").value),aL=n("aL"),aD=n("aD"),
+      ws=Math.min(59,n("ws")),cv=n("cv"),ex=n("ex"),fr=n("fr"),oh=n("oh"),mg=n("mg"),gst=n("gst");
+  var cut=2*(L+B)+aL,
+      deck = sty==="hsc" ? B/2+H+aD : sty==="fol" ? 2*B+H+aD : B+H+aD,
+      area=cut*deck/1e6, gsm=0,bs=0,per=[];
+  layers.forEach(function(x){var eff=x.g*(x.f?tuf:1),w=area*eff/1000;
+    gsm+=eff;bs+=x.g*x.bf;per.push({nm:x.nm,g:x.g,w:w,r:x.r,c:w*x.r})});
+  bs/=1000;var wt=area*gsm/1000,f=1-ws/100,
+      pN=per.reduce(function(s,x){return s+x.c},0),pB=pN/f,bB=wt/f,
+      cvC=bB*cv,sub=pB+cvC+ex+fr,ohC=sub*oh/100,cost=sub+ohC,mgC=cost*mg/100,sell=cost+mgC;
+  R={L:L,B:B,H:H,sty:sty,qty:qty,ply:ply,tuf:tuf,aL:aL,aD:aD,cut:cut,deck:deck,area:area,gsm:gsm,bs:bs,
+     wt:wt,bB:bB,pB:pB,cvC:cvC,ex:ex,fr:fr,ohC:ohC,cost:cost,mgC:mgC,sell:sell,ws:ws,per:per,gst:gst,oh:oh,mg:mg,cv:cv};
+  $("sell").innerHTML=inr(sell)+' <small>selling price / box</small>';
+  $("cost").textContent=inr(cost);$("mg2").textContent=inr(mgC);$("ov").textContent=inr(sell*qty,0);
+  $("kL").innerHTML=nf(cut)+' <em>mm</em>';$("kD").innerHTML=nf(deck)+' <em>mm</em>';
+  $("kW").innerHTML=nf(wt,3)+' <em>kg</em>';$("kG").innerHTML=nf(gsm)+' <em>gsm</em>';
+  $("kB").innerHTML=nf(bs,1)+' <em>kg/cm²</em>';$("kT").innerHTML=nf(bB*qty,0)+' <em>kg</em>';
+  steps();buyT();gstT();draw();$("wa").href="https://wa.me/?text="+encodeURIComponent(sum());
+}
+function rw(t,e,v,c){return '<div class="st'+(c?" "+c:"")+'"><div class="t">'+t+(e?'<em>'+e+'</em>':'')+'</div><div class="v">'+v+'</div></div>'}
+function steps(){
+  var h="";
+  h+=rw("Cutting length","2 × ("+nf(R.L)+" + "+nf(R.B)+") + "+nf(R.aL),nf(R.cut)+" mm");
+  h+=rw("Deckle",(R.sty==="fol"?"2 × ":"")+nf(R.B)+(R.sty==="hsc"?" ÷ 2":"")+" + "+nf(R.H)+" + "+nf(R.aD),nf(R.deck)+" mm");
+  h+=rw("Board area per box",nf(R.cut)+" × "+nf(R.deck)+" ÷ 1,000,000",nf(R.area,4)+" m²");
+  h+=rw("Combined GSM","fluting × take-up "+R.tuf+", liners × 1",nf(R.gsm)+" gsm");
+  h+=rw("Board in one box",nf(R.area,4)+" m² × "+nf(R.gsm)+" gsm",nf(R.wt,3)+" kg");
+  h+=rw("Board to buy per box","÷ "+(1-R.ws/100).toFixed(2)+" for "+nf(R.ws,1)+"% wastage",nf(R.bB,3)+" kg");
+  h+=rw("Paper","grade-wise rates, after wastage",inr(R.pB));
+  h+=rw("Conversion",nf(R.bB,3)+" kg × "+inr(R.cv),inr(R.cvC));
+  if(R.ex>0)h+=rw("Printing and extras","",inr(R.ex));
+  if(R.fr>0)h+=rw("Freight","",inr(R.fr));
+  h+=rw("Overhead",nf(R.oh,1)+"% on the above",inr(R.ohC));
+  h+=rw("Cost per box","",inr(R.cost),"tot");
+  h+=rw("Margin",nf(R.mg,1)+"% on cost",inr(R.mgC));
+  h+=rw("Selling price per box","",'<span style="color:var(--mint)">'+inr(R.sell)+'</span>',"tot");
+  $("steps").innerHTML=h
+}
+function buyT(){var h="",tk=0,tc=0;
+  R.per.forEach(function(x){var kg=x.w*R.qty/(1-R.ws/100),c=kg*x.r;tk+=kg;tc+=c;
+    h+='<tr><td>'+x.nm+' · '+nf(x.g)+' gsm</td><td>'+nf(kg,1)+'</td><td>'+inr(c,0)+'</td></tr>'});
+  h+='<tr><td>For '+nf(R.qty)+' boxes</td><td>'+nf(tk,1)+' kg</td><td>'+inr(tc,0)+'</td></tr>';
+  $("buy").innerHTML=h}
+function gstT(){var tax=R.sell*R.qty*R.gst/100;
+  $("gstBox").innerHTML=rw("Taxable value",nf(R.qty)+" boxes × "+inr(R.sell),inr(R.sell*R.qty,0))
+   +rw("CGST + SGST","each "+nf(R.gst/2,1)+"%, within Karnataka",inr(tax,0))
+   +rw("Invoice value","",'<span style="color:var(--mint)">'+inr(R.sell*R.qty+tax,0)+'</span>',"tot")
+   +'<p class="fine" style="padding:14px 0 0">Corrugated boxes sit under HSN 4819. Confirm the rate for your exact item on the CBIC portal before invoicing.</p>'}
+function draw(){
+  var W=660,Ht=300,pd=52,p=[R.L,R.B,R.L,R.B],lap=Math.max(28,R.aL),
+      tw=p[0]+p[1]+p[2]+p[3]+lap,ft=R.sty==="hsc"?0:R.B/2,fb=R.B/2,th=ft+R.H+fb;
+  if(!tw||!th||!isFinite(tw)||!isFinite(th)){$("dg").innerHTML="";return}
+  var s=Math.min((W-pd*2)/tw,(Ht-pd*2)/th),ox=(W-tw*s)/2,oy=(Ht-th*s)/2,g="",x=ox,
+      by=oy+ft*s,bh=R.H*s;
+  function rc(a,b,w,h,f,o){return '<rect x="'+a+'" y="'+b+'" width="'+w+'" height="'+h+'" fill="'+f+'" opacity="'+(o||1)+'" stroke="rgba(250,250,247,.22)" stroke-width="1"/>'}
+  function tx(a,b,t,sz,c,an){return '<text x="'+a+'" y="'+b+'" text-anchor="'+(an||"middle")+'" font-family="JetBrains Mono, monospace" font-size="'+(sz||10)+'" fill="'+(c||"rgba(250,250,247,.45)")+'">'+t+'</text>'}
+  p.forEach(function(v){var w=v*s;
+    if(ft>0)g+=rc(x,oy,w,ft*s,"#7B4DF6",.14);
+    g+=rc(x,by,w,bh,"#7B4DF6",.3);
+    g+=rc(x,by+bh,w,fb*s,"#7B4DF6",.14);
+    g+=tx(x+w/2,by+bh/2+4,nf(v),11,"rgba(250,250,247,.85)");x+=w});
+  g+=rc(x,by,lap*s,bh,"#A47AFF",.22)+tx(x+lap*s/2,by+bh/2+4,"lap",8);
+  var cx=ox;p.forEach(function(v){cx+=v*s;
+    g+='<line x1="'+cx+'" y1="'+oy+'" x2="'+cx+'" y2="'+(oy+th*s)+'" stroke="#6BFFB0" stroke-width="1" stroke-dasharray="5 4" opacity=".7"/>'});
+  [ft>0?by:null,by+bh].forEach(function(y){if(y===null)return;
+    g+='<line x1="'+ox+'" y1="'+y+'" x2="'+(ox+tw*s)+'" y2="'+y+'" stroke="#6BFFB0" stroke-width="1" stroke-dasharray="5 4" opacity=".7"/>'});
+  var yb=oy+th*s+24;
+  g+='<line x1="'+ox+'" y1="'+yb+'" x2="'+(ox+tw*s)+'" y2="'+yb+'" stroke="rgba(250,250,247,.3)"/>'
+   + tx(ox+tw*s/2,yb-6,nf(R.cut)+" mm cutting length",10,"rgba(250,250,247,.6)");
+  var lx=ox-20,my=oy+th*s/2;
+  g+='<line x1="'+lx+'" y1="'+oy+'" x2="'+lx+'" y2="'+(oy+th*s)+'" stroke="rgba(250,250,247,.3)"/>'
+   + '<text x="'+(lx-7)+'" y="'+my+'" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(250,250,247,.6)" transform="rotate(-90 '+(lx-7)+' '+my+')">'+nf(R.deck)+' mm deckle</text>';
+  g+=tx(ox+tw*s/2,oy-14,"flat blank · "+R.ply+" ply · "+$("fl").options[$("fl").selectedIndex].text.split(" —")[0],10);
+  $("dg").innerHTML='<title id="dgt">Flat blank, '+nf(R.cut)+' by '+nf(R.deck)+' mm</title>'+g
+}
+function sum(){return ["BOX COSTING — "+nf(R.L)+" x "+nf(R.B)+" x "+nf(R.H)+" mm, "+R.ply+" ply",
+  "Cutting size: "+nf(R.cut)+" x "+nf(R.deck)+" mm",
+  "Board: "+nf(R.gsm)+" gsm, "+nf(R.wt,3)+" kg/box, est BS "+nf(R.bs,1)+" kg/cm2","",
+  "Paper "+inr(R.pB)+" | Conversion "+inr(R.cvC)+" | Overhead "+inr(R.ohC),
+  "COST/BOX: "+inr(R.cost),"SELLING/BOX: "+inr(R.sell),"",
+  "For "+nf(R.qty)+" boxes: "+nf(R.bB*R.qty,0)+" kg board",
+  "Taxable "+inr(R.sell*R.qty,0)+" + GST "+nf(R.gst)+"% = "+inr(R.sell*R.qty*(1+R.gst/100),0),"",
+  "Open or edit this costing:", encode()].join("\n")}
+
+/* ---------- shareable link: the whole costing lives in the URL ---------- */
+var FLD=["L","B","H","sty","qty","fl","aL","aD","ws","cv","ex","fr","oh","mg","gst","co","cu"],
+    KEY={L:"l",B:"b",H:"h",sty:"s",qty:"q",fl:"f",aL:"al",aD:"ad",ws:"w",cv:"cv",
+         ex:"ex",fr:"fr",oh:"oh",mg:"mg",gst:"g",co:"co",cu:"cu"};
+function encode(){
+  var p=new URLSearchParams();
+  FLD.forEach(function(id){var v=$(id).value;if(v!=="")p.set(KEY[id],v)});
+  p.set("p",ply);
+  p.set("ly",layers.map(function(x){return x.g+"-"+x.bf+"-"+x.r}).join("_"));
+  return location.origin+location.pathname+"?"+p.toString();
+}
+function decode(){
+  var p=new URLSearchParams(location.search);
+  if(!p.has("l")&&!p.has("ly"))return false;
+  var pl=parseInt(p.get("p"),10);
+  if(pl===3||pl===5||pl===7){
+    ply=pl;
+    [].forEach.call($("seg").querySelectorAll("button"),function(x){
+      x.setAttribute("aria-pressed",+x.dataset.p===pl?"true":"false")});
+  }
+  layers=[];build();
+  var ly=p.get("ly");
+  if(ly){ly.split("_").forEach(function(seg,i){
+    var t=seg.split("-");
+    if(layers[i]&&t.length===3){
+      if(isFinite(+t[0]))layers[i].g=+t[0];
+      if(isFinite(+t[1]))layers[i].bf=+t[1];
+      if(isFinite(+t[2]))layers[i].r=+t[2];
+    }});paint()}
+  FLD.forEach(function(id){var v=p.get(KEY[id]);if(v!==null&&v!=="")$(id).value=v});
+  return true;
+}
+function flash(b,t){var o=b.textContent;b.textContent=t;setTimeout(function(){b.textContent=o},1700)}
+function toClip(t,b,okTxt){
+  var done=function(){flash(b,okTxt)};
+  if(navigator.clipboard&&navigator.clipboard.writeText)
+    return navigator.clipboard.writeText(t).then(done,fb);
+  fb();
+  function fb(){var ta=document.createElement("textarea");ta.value=t;
+    ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();
+    try{document.execCommand("copy");done()}catch(e){flash(b,"Press Ctrl+C")}
+    document.body.removeChild(ta)}
+}
+$("lk").addEventListener("click",function(){toClip(encode(),this,"Link copied")});
+
+/* ---------- printed costing sheet ---------- */
+function prow(t,e,v,c){return '<tr'+(c?' class="'+c+'"':'')+'><td>'+t+(e?'<em>'+e+'</em>':'')+'</td><td>'+v+'</td></tr>'}
+function sheet(){
+  var co=$("co").value.trim(),cu=$("cu").value.trim(),
+      d=new Date().toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"}),
+      styN=$("sty").options[$("sty").selectedIndex].text.split(" —")[0],
+      h='<h1>'+(co?co.replace(/</g,"&lt;"):"Box costing")+'</h1>'
+       +'<p class="sub">Costing for a '+nf(R.L)+' × '+nf(R.B)+' × '+nf(R.H)+' mm '+styN+', '
+       +R.ply+' ply'+(cu?' &middot; for '+cu.replace(/</g,"&lt;"):'')+' &middot; '+d+'</p>';
+  h+='<h2>Board</h2><table>';
+  h+=prow("Cutting size","blank, length × deckle",nf(R.cut)+" × "+nf(R.deck)+" mm");
+  h+=prow("Combined GSM","take-up applied to fluting only",nf(R.gsm)+" gsm");
+  h+=prow("Board in one box","",nf(R.wt,3)+" kg");
+  h+=prow("Board to buy per box","after "+nf(R.ws,1)+"% wastage",nf(R.bB,3)+" kg");
+  h+=prow("Est. bursting strength","from GSM and BF, not a Mullen test",nf(R.bs,1)+" kg/cm²");
+  h+='</table><h2>Cost per box</h2><table>';
+  h+=prow("Paper","grade-wise rates, after wastage",inr(R.pB));
+  h+=prow("Conversion",nf(R.bB,3)+" kg × "+inr(R.cv),inr(R.cvC));
+  if(R.ex>0)h+=prow("Printing and extras","",inr(R.ex));
+  if(R.fr>0)h+=prow("Freight","",inr(R.fr));
+  h+=prow("Overhead",nf(R.oh,1)+"% on the above",inr(R.ohC));
+  h+=prow("Cost per box","",inr(R.cost),"tot");
+  h+=prow("Margin",nf(R.mg,1)+"% on cost",inr(R.mgC));
+  h+=prow("Selling price per box","",inr(R.sell),"tot");
+  h+='</table><h2>This order &mdash; '+nf(R.qty)+' boxes</h2><table>';
+  h+=prow("Board to purchase","includes wastage",nf(R.bB*R.qty,0)+" kg");
+  h+=prow("Taxable value","",inr(R.sell*R.qty,0));
+  h+=prow("GST @ "+nf(R.gst,1)+"%","CGST + SGST within Karnataka",inr(R.sell*R.qty*R.gst/100,0));
+  h+=prow("Invoice value","",inr(R.sell*R.qty*(1+R.gst/100),0),"tot");
+  h+='</table><p class="foot">Worked out on boxcalc.theingredientlist.co — a free tool from Threxa, '
+   +'ERP for corrugated box plants. Figures depend on the rates and allowances entered above '
+   +'and are an estimate, not a quotation.</p>';
+  $("psheet").innerHTML=h;
+}
+$("pr").addEventListener("click",function(){sheet();window.print()});
+
+/* ---------- CSV ---------- */
+$("cs").addEventListener("click",function(){
+  var q=function(v){return '"'+String(v).replace(/"/g,'""')+'"'},
+      r=[["Field","Detail","Value"],
+         ["Plant",$("co").value,""],["Customer",$("cu").value,""],
+         ["Box (mm)",$("sty").options[$("sty").selectedIndex].text.split(" —")[0],
+          R.L+" x "+R.B+" x "+R.H],
+         ["Ply","",R.ply],["Cutting length","mm",R.cut],["Deckle","mm",R.deck],
+         ["Combined GSM","take-up on fluting only",Math.round(R.gsm)],
+         ["Board per box","kg",R.wt.toFixed(4)],
+         ["Board to buy per box","kg, after "+R.ws+"% wastage",R.bB.toFixed(4)],
+         ["Est. bursting strength","kg/cm2",R.bs.toFixed(2)],["","",""]];
+  R.per.forEach(function(x){r.push(["Layer: "+x.nm,x.g+" gsm @ Rs "+x.r+"/kg",x.w.toFixed(4)])});
+  r.push(["","",""]);
+  r.push(["Paper cost","Rs/box",R.pB.toFixed(2)],["Conversion","Rs/box",R.cvC.toFixed(2)],
+         ["Printing and extras","Rs/box",R.ex.toFixed(2)],["Freight","Rs/box",R.fr.toFixed(2)],
+         ["Overhead","Rs/box",R.ohC.toFixed(2)],["COST PER BOX","Rs",R.cost.toFixed(2)],
+         ["Margin","Rs/box",R.mgC.toFixed(2)],["SELLING PRICE PER BOX","Rs",R.sell.toFixed(2)],
+         ["","",""],["Order quantity","boxes",R.qty],
+         ["Board to purchase","kg",(R.bB*R.qty).toFixed(1)],
+         ["Taxable value","Rs",(R.sell*R.qty).toFixed(2)],
+         ["GST","Rs @ "+R.gst+"%",(R.sell*R.qty*R.gst/100).toFixed(2)],
+         ["INVOICE VALUE","Rs",(R.sell*R.qty*(1+R.gst/100)).toFixed(2)],
+         ["","",""],["Source","boxcalc.theingredientlist.co",""]);
+  var csv="\ufeff"+r.map(function(x){return x.map(q).join(",")}).join("\r\n"),
+      bl=new Blob([csv],{type:"text/csv;charset=utf-8;"}),u=URL.createObjectURL(bl),
+      a=document.createElement("a");
+  a.href=u;a.download="box-costing-"+R.L+"x"+R.B+"x"+R.H+".csv";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(u)},900);
+  flash(this,"Downloaded");
+});
+
+$("cp").addEventListener("click",function(){var b=this,t=sum(),
+  ok=function(){b.textContent="Copied";setTimeout(function(){b.textContent="Copy as text"},1600)};
+  function fb(){var a=document.createElement("textarea");a.value=t;a.style.position="fixed";a.style.opacity="0";
+    document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(e){b.textContent="Press Ctrl+C"}
+    document.body.removeChild(a)}
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,fb);else fb()});
+document.addEventListener("input",function(e){if(e.target.closest(".in")&&!e.target.dataset.k)calc()});
+document.addEventListener("change",function(e){if(e.target.tagName==="SELECT")calc()});
+if(!decode()) build();
+calc();
+})();
+</script>
+</body>
+</html>
