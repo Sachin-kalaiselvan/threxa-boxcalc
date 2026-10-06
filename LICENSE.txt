@@ -1,0 +1,16 @@
+Copyright (c) 2026 The Ingredient List, Bengaluru, India.
+Threxa is a unit of The Ingredient List.
+
+All rights reserved.
+
+This source code is proprietary and is not open source. No permission is
+granted to any person to copy, modify, merge, publish, distribute, sublicense,
+sell, host, or create derivative works from this software or any part of it,
+in any medium, without prior written permission from the copyright holder.
+
+The calculator published at https://boxcalc.theingredientlist.co is free for
+anyone to use through that website, and the results it produces belong to the
+person who entered the figures. That permission covers use of the website only.
+It does not extend to the source code in this repository.
+
+Enquiries: sachin@theingredientlist.co
