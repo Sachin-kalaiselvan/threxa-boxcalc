@@ -181,7 +181,7 @@ footer.end{padding:22px 0 44px;border-top:1px solid var(--ink-07);font-size:12.5
 .in input[type=text]:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 3px rgba(123,77,246,.14)}
 .acts{flex-wrap:wrap}
 
-/* printed costing sheet — hidden on screen, is the page when printing */
+/* printed costing sheet - hidden on screen, is the page when printing */
 .psheet{display:none}
 @media print{
   @page{size:A4;margin:14mm}
@@ -506,7 +506,7 @@ function sum(){return ["BOX COSTING — "+nf(R.L)+" x "+nf(R.B)+" x "+nf(R.H)+" 
   "Taxable "+inr(R.sell*R.qty,0)+" + GST "+nf(R.gst)+"% = "+inr(R.sell*R.qty*(1+R.gst/100),0),"",
   "Open or edit this costing:", encode()].join("\n")}
 
-/* ---------- shareable link: the whole costing lives in the URL ---------- */
+/* shareable link: the whole costing lives in the url */
 var FLD=["L","B","H","sty","qty","fl","aL","aD","ws","cv","ex","fr","oh","mg","gst","co","cu"],
     KEY={L:"l",B:"b",H:"h",sty:"s",qty:"q",fl:"f",aL:"al",aD:"ad",ws:"w",cv:"cv",
          ex:"ex",fr:"fr",oh:"oh",mg:"mg",gst:"g",co:"co",cu:"cu"};
@@ -551,7 +551,7 @@ function toClip(t,b,okTxt){
 }
 $("lk").addEventListener("click",function(){toClip(encode(),this,"Link copied")});
 
-/* ---------- printed costing sheet ---------- */
+/* printed costing sheet */
 function prow(t,e,v,c){return '<tr'+(c?' class="'+c+'"':'')+'><td>'+t+(e?'<em>'+e+'</em>':'')+'</td><td>'+v+'</td></tr>'}
 function sheet(){
   var co=$("co").value.trim(),cu=$("cu").value.trim(),
@@ -587,7 +587,7 @@ function sheet(){
 }
 $("pr").addEventListener("click",function(){sheet();window.print()});
 
-/* ---------- CSV ---------- */
+/* csv */
 $("cs").addEventListener("click",function(){
   var q=function(v){return '"'+String(v).replace(/"/g,'""')+'"'},
       r=[["Field","Detail","Value"],
